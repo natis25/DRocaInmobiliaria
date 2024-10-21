@@ -96,6 +96,34 @@ function insertarVivienda($direccion, $montoPedido, $zona, $tipoVivienda, $tipoO
     mysqli_close($conexion);
 }
 
+function insertarTrabajador($nombre, $telefono, $correo)
+{
+    $conexion = Conectarse();
+    if (!$conexion) {
+        die("Error de conexión a la base de datos");
+    }
+
+    $sql = "INSERT INTO Trabajador (
+                nombre, telefono, correo
+            ) 
+            VALUES (?, ?, ?)";
+
+    $stmt = $conexion->prepare($sql);
+
+    // Cambia la cadena de tipos a 'sss' si todos son strings
+    $stmt->bind_param('sss', $nombre, $telefono, $correo);
+
+    if ($stmt->execute()) {
+        echo "Registro insertado correctamente";
+    } else {
+        echo "Error al insertar el registro: " . $stmt->error;
+    }
+
+    $stmt->close();
+    mysqli_close($conexion);
+}
+
+
 function obtenerViviendasDisponibles() {
     $conexion = Conectarse();
     if (!$conexion) {
@@ -133,6 +161,26 @@ function obtenerViviendasDisponibles() {
 
     mysqli_close($conexion);
     return $viviendas;
+}
+
+function obtenerTabajadores() {
+    $conexion = Conectarse();
+    if (!$conexion) {
+        return [];
+    }
+
+    $consulta = "SELECT * FROM trabajador;";
+    $resultado = mysqli_query($conexion, $consulta);
+
+
+    if ($resultado) {
+        $trabajadores = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+    } else {
+        $trabajadores = [];
+    }
+
+    mysqli_close($conexion);
+    return $trabajadores;
 }
 
 function insertarCliente($nombre, $telefono, $correo) {
@@ -267,8 +315,6 @@ function cancelarCita($idCita) {
     mysqli_close($conexion);
 }
 
-// Agregar en Logica/sql.php
-
 function obtenerInmueblePorId($idInmueble) {
     $conexion = Conectarse();
     if (!$conexion) {
@@ -303,6 +349,40 @@ function obtenerInmueblePorId($idInmueble) {
     mysqli_close($conexion);
     
     return $inmueble;
+}
+
+function obtenerTabajadoresPorId($idTrabajador) {
+    $conexion = Conectarse();
+    if (!$conexion) {
+        return null;
+    }
+
+    $consulta = "
+        SELECT 
+            T.idTrabajador,
+            T.nombre,
+            T.telefono,
+            T.correo
+        FROM 
+            Trabajador T
+        WHERE 
+            T.idTrabajador = ?";
+
+    $stmt = $conexion->prepare($consulta);
+    $stmt->bind_param("i", $idTrabajador);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($resultado->num_rows > 0) {
+        $idTrabajador = $resultado->fetch_assoc();
+    } else {
+        $idTrabajador = null;
+    }
+
+    $stmt->close();
+    mysqli_close($conexion);
+    
+    return $idTrabajador;
 }
 
 function obtenerCitasVigentes() {
