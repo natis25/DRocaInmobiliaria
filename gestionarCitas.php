@@ -48,7 +48,6 @@
                     <th>Correo</th>
                     <th>Vivienda</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,14 +66,6 @@
                         echo "<td>" . $cita['CorreoCliente'] . "</td>";
                         echo "<td>" . $cita['DireccionVivienda'] . "</td>";
                         echo "<td>" . $cita['Estado'] . "</td>";
-                        echo "<td>";
-                        echo "<div class='action-buttons'>";
-                        echo "<a href='modificarCita.php?id=" . $cita['idCita'] . "' class='btn btn-warning'>Modificar</a>";
-                        echo "<button class='btn btn-info'>Asignar agente</button>";
-                        echo "<button class='btn btn-warning'>Ofertado</button>";
-                        echo "<button class='btn btn-success'>Cerrar trato</button>";
-                        echo "</div>";
-                        echo "</td>";
                         echo "</tr>";
                     }
                 } else {
