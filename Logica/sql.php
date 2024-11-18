@@ -220,9 +220,12 @@ function insertarCita($fechaVisita, $horaInicio, $horaFin, $idVivienda, $idClien
                 esTrato, 
                 Vivienda_idVivienda, 
                 Cliente_idCliente, 
-                Estado_idEstado
+                Estado_idEstado,
+                Trabajador_idTrabajador,
+                MontoOfrecido,
+                FechaTrato
             ) 
-            VALUES (?, ?, ?, FALSE, ?, ?, ?)";
+            VALUES (?, ?, ?, FALSE, ?, ?, ?, 1, -1, NULL)";
 
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("sssiii", $fechaVisita, $horaInicio, $horaFin, $idVivienda, $idCliente, $estado);
