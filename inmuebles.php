@@ -113,7 +113,7 @@ if (!empty($viviendas)) {
           <div class='modal-content'>
             <span class='close-btn' onclick='closeModal($index)'>&times;</span>
             <h3>Agendar Cita</h3>
-            <form method='POST' action='Logica/setCita.php'>
+            <form method='POST' action='Logica/setCita.php' id='form-$index'>
               <div class='form-group'>
                 <label for='nombre-$index'>Nombre:</label>
                 <input type='text' class='form-control' id='nombre-$index' name='nombre' required>
@@ -130,12 +130,15 @@ if (!empty($viviendas)) {
                 <label for='fecha-$index'>Fecha de la cita:</label>
                 <input type='date' class='form-control' id='fecha-$index' name='fecha' required>
               </div>
+              <script>
+              document.getElementById('fecha-<?php echo $index; ?>').setAttribute('min', new Date().toISOString().split('T')[0]);
+              </script>
               <div class='form-group'>
                 <label for='hora_inicio-$index'>Hora de inicio:</label>
                 <input type='time' class='form-control' id='hora_inicio-$index' name='hora_inicio' required>
               </div>
               <input type='hidden' name='idVivienda' value='{$fila['idVivienda']}'>
-              <button type='submit' class='btn btn-success'>Agendar</button>
+              <button type='submit' class='btn btn-success' id='submit-$index' disabled>Agendar</button>
             </form>
           </div>
         </div>";
@@ -148,6 +151,26 @@ if (!empty($viviendas)) {
   </div>
 
   <script>
+    function validarFormulario(index) {
+        const formulario = document.getElementById(`form-${index}`);
+        const botonEnviar = document.getElementById(`submit-${index}`);
+        const esValido = formulario.checkValidity();
+        botonEnviar.disabled = !esValido;
+    }
+
+    document.querySelectorAll('form').forEach((form, index) => {
+        form.querySelectorAll('input').forEach((input) => {
+            input.addEventListener('input', () => validarFormulario(index));
+        });
+    });
+
+    window.addEventListener('load', () => {
+        const fechaInputs = document.querySelectorAll('input[type="date"]');
+        fechaInputs.forEach((input) => {
+            input.setAttribute('min', new Date().toISOString().split('T')[0]);
+        });
+    });
+
     function openModal(index) {
       document.getElementById(`modal-${index}`).style.display = 'flex';
     }
