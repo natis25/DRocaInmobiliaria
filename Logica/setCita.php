@@ -20,6 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error al registrar el cliente.";
     }
 }
-header("Location: ../Inmuebles.php");
+header("Location: ../inmuebles.php");
 exit();
 ?>
