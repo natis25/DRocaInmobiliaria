@@ -44,23 +44,9 @@
             background-color: #0056b3;
         }
 
-        .contact-info, .map-container, .social-media, .business-hours {
-            margin-top: 30px;
-        }
-
         .social-media img {
             margin: 0 10px;
             width: 40px;
-        }
-
-        iframe {
-            border: 0;
-            width: 100%;
-            height: 400px;
-        }
-
-        .business-hours p {
-            margin: 0;
         }
     </style>
 </head>
@@ -70,24 +56,20 @@
         <h1>Contáctanos</h1>
 
         <!-- Formulario de Contacto -->
-        <form action="/send_message.php" method="post">
+        <form action="mailto:tu_correo@ejemplo.com" method="get" enctype="text/plain">
             <div class="form-group">
                 <label for="name">Nombre:</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="text" class="form-control" id="name" name="subject" placeholder="Tu Nombre" required>
             </div>
             <div class="form-group">
                 <label for="message">Mensaje:</label>
-                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                <textarea class="form-control" id="message" name="body" rows="5" placeholder="Escribe tu mensaje aquí" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
 
         <div class="social-media">
-            <h2>Contactanos</h2>
+            <h2>Contáctanos</h2>
             <a href="https://www.facebook.com/profile.php?id=100064156680320&mibextid=ZbWKwL" target="_blank">
                 <img src="Images/Contactos/icons8-facebook.svg" alt="Facebook">
             </a>
@@ -102,6 +84,5 @@
             </a>
         </div>
     </div>
-
 </body>
 </html>
