@@ -1,7 +1,7 @@
 <?php
 function Conectarse()
 {
-    if (!($link = mysqli_connect("localhost", "root", ""))) {
+    if (!($link = mysqli_connect("localhost", "root", "root"))) {
         return 0;
     }
     if (!mysqli_select_db($link, "droca")) {

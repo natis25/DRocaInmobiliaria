@@ -20,10 +20,10 @@
 
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: 1fr;
       gap: 20px;
       width: 90%;
-      max-width: 800px;
+      max-width: 400px;
     }
 
     .grid-container button {
@@ -56,6 +56,10 @@
     .btn-inicio {
       background-color: #6c757d;
     }
+
+    .btn-oraculo {
+      background-color: #6f42c1;
+    }
   </style>
 </head>
 
@@ -64,6 +68,7 @@
     <button class="btn-citas" onclick="location.href='gestionarCitas.php'">Gestionar Citas</button>
     <button class="btn-inmuebles" onclick="location.href='gestionarInmuebles.php'">Gestionar Inmuebles</button>
     <button class="btn-empleados" onclick="location.href='gestionarEmpleados.php'">Gestionar Empleados</button>
+    <button class="btn-oraculo" onclick="location.href='oraculo.php'">Oráculo de Decisiones</button>
     <button class="btn-inicio" onclick="location.href='index.php'">Volver a Inicio</button>
   </div>
 
